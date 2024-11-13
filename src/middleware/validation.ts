@@ -16,3 +16,16 @@ export const validateMyUserRequest = [
     body("country").isString().notEmpty().withMessage("Country must be a string"),
     handleValidationErrors
 ]
+
+export const validateMyRestaurantRequest = [
+    body("restaurantName").notEmpty().withMessage("Restaurant Name is required"),
+    body("city").notEmpty().withMessage("City is required"),
+    body("country").notEmpty().withMessage("Country is required"),
+    body("deliveryPrice").isFloat({min:0}).withMessage("The delivery price must a positif number"),
+    body("estimatedDelivaryTime").isInt({min:0}).withMessage("The estimated delivary time must a positif integar"),
+    body("cuisines").isArray().withMessage("cuisines must be an array").not().isEmpty().withMessage("cuisines cannot be emty array"),
+    body("menuItems").isArray().withMessage("Menu items must be an array"),
+    body("menuItems.*.name").notEmpty().withMessage("Menu item name is required"),
+    body("menuItems.*.price").isFloat({min:0}).withMessage("Menu item price must be required and a positif number"),
+    handleValidationErrors
+]   
